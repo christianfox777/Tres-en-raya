@@ -42,7 +42,3 @@ Begin_button.pack()
 Begin_button.place(relx=0.5 , rely= 0.8, anchor="center")
 
 window_title.mainloop()
-
-
-
-
