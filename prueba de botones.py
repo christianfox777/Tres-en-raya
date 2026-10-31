@@ -10,9 +10,24 @@ gameplay_player_container.pack(fill = "x")
 
 jugador = "X"
 
+def verificar_ganador():
+    if boton.num_assign == 1 in boton.row[row]:
+        
+        
+
 def marcar_celda(boton):
     global jugador
 
+    if boton.cget("text")=="":
+        boton.config(text = jugador)
+        
+        if jugador == "X":
+            boton.num_assign = 1
+            jugador = "O"
+        else:
+            jugador = "X"
+            boton.num_assign = 2
+'''
     if boton.button_id == "Cell (0, 0)":
         boton.config(text=jugador, fg = "#000000")
 
@@ -93,6 +108,7 @@ def marcar_celda(boton):
             jugador = "O"
         else:
             jugador = "X"
+'''
 
 test_congratulations_player = tk.Label(congratulations_player_text_container, text = "Test")
 test_congratulations_player.place(relx = 0.5, rely= 0.12, anchor="center")
@@ -102,17 +118,21 @@ for row in range(3):
     for col in range(3):
 
         boton = tk.Button(gameplay_player_container,
-            text=f"Cell ({row}, {col})",
+            #text=f"Cell ({row}, {col})",
+            text = "",
             width=10,
             height=5,
-            fg = "#f0f0f0",
-            bg = "#f0f0f0",
-            activebackground= "#f0f0f0",
-            activeforeground= "#f0f0f0",
+            #fg = "#f0f0f0",
+            #bg = "#f0f0f0",
+            #activebackground= "#f0f0f0",
+            #activeforeground= "#f0f0f0",
             cursor = "cross"
         )
 
-        boton.button_id = f"Cell ({row}, {col})"
+        boton.col = col
+        boton.row = row
+        boton.button_id = f"({row})({col})"
+        boton.num_assign = 1
         boton.config(command=lambda b=boton: marcar_celda(b))        
         boton.grid(row=row, column=col)
 
