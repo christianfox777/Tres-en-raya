@@ -1,6 +1,8 @@
 #Tres en Raya v1.0 Christian Suarez, Nicolas Rivera y Christopher Barreno
 #27.09.2026
 import tkinter as tk
+import random
+
 window_title = tk.Tk()
 window_title.title("Tres en Raya v.1.0")
 window_title.geometry("800x700")
@@ -9,8 +11,29 @@ window_title.configure(bg= "#CCE6F4")
 #Player selection
 jugador = "X"
 
+jugador1 = "Jugador 1"
+jugador2 = "Jugador 2"
+asignacion = {}  
+
+def asignar_player(p1, p2):
+    jugadores = [p1, p2]
+    random.shuffle(jugadores)
+    return {"x": jugadores[0], "o": jugadores[1]}
+
+def asignacion_players():
+    global asignacion
+    asignacion = asignar_player(jugador1, jugador2)
+
+def nombre_de(simbolo):
+    return asignacion[simbolo.lower()]
+
 #Matriz del juego
 def gameplay_tres_en_raya():
+
+    global jugador
+    jugador = "X"                  
+    asignacion_players()           
+    Begin_button.place_forget()
     botones = [
     [None, None, None],
     [None, None, None],
@@ -92,10 +115,10 @@ def gameplay_tres_en_raya():
             ganador = validar_juego()
             if ganador != None:
                 if ganador == 1:
-                    test_congratulations_player.config(text="El jugador 1 (X) ha ganado")
+                    test_congratulations_player.config(text=f"{nombre_de('X')} (X) ha ganado")
                     deshabilitar_botones()
                 elif ganador == 2:
-                    test_congratulations_player.config(text="El jugador 2 (O) ha ganado")
+                    test_congratulations_player.config(text=f"{nombre_de('O')} (O) ha ganado")
                     deshabilitar_botones()
             else:
                 test_congratulations_player.config(text="No hay ganadores")
@@ -115,7 +138,8 @@ def gameplay_tres_en_raya():
                 jugador = "X"
                 boton.num_assign = 2
 
-    test_congratulations_player = tk.Label(congratulations_player_text_container, text = "Test")
+    test_congratulations_player = tk.Label(congratulations_player_text_container,
+        text = f"{nombre_de('X')} es X y empieza | {nombre_de('O')} es O")
     test_congratulations_player.place(relx = 0.5, rely= 0.12, anchor="center")
     test_congratulations_player.pack()
 
