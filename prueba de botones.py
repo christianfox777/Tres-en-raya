@@ -28,7 +28,7 @@ def validar_juego():
         boton_row_1 = botones[row][1]
         boton_row_2 = botones[row][2]
 
-        if boton_row_0.num_assign == boton_row_1.num_assign and boton_row_1.num_assign == boton_row_2.num_assign:
+        if boton_row_0.num_assign is not None and boton_row_0.num_assign == boton_row_1.num_assign and boton_row_1.num_assign == boton_row_2.num_assign:
             return boton_row_0.num_assign
 
     for col in range(3):
@@ -36,24 +36,23 @@ def validar_juego():
         boton_col_1 = botones[1][col]
         boton_col_2 = botones[2][col]
                 
-        if boton_col_0.num_assign == boton_col_1.num_assign and boton_col_1.num_assign == boton_col_2.num_assign:
+        if boton_col_0.num_assign is not None and boton_col_0.num_assign == boton_col_1.num_assign and boton_col_1.num_assign == boton_col_2.num_assign:
             return boton_col_0.num_assign
 
     boton_diag_0 = botones[0][0]
     boton_diag_1 = botones[1][1]
     boton_diag_2 = botones[2][2]
 
-    if boton_diag_0.num_assign == boton_diag_1.num_assign and boton_diag_1.num_assign == boton_diag_2.num_assign:
+    if boton_diag_0.num_assign is not None and boton_diag_0.num_assign == boton_diag_1.num_assign and boton_diag_1.num_assign == boton_diag_2.num_assign:
             return boton_diag_0.num_assign
 
     boton_diag2_0 = botones[0][2]
     boton_diag2_1 = botones[1][1]
     boton_diag2_2 = botones[2][0]
     
-    if boton_diag2_0.num_assign == boton_diag2_1.num_assign and boton_diag2_1.num_assign == boton_diag2_2.num_assign:
+    if boton_diag2_0.num_assign is not None and boton_diag2_0.num_assign == boton_diag2_1.num_assign and boton_diag2_1.num_assign == boton_diag2_2.num_assign:
             return boton_diag2_0.num_assign
 
-    
     return None
 
 def deshabilitar_botones():
@@ -72,9 +71,16 @@ def jugar(row,col):
         if jugador == "X":
             boton.num_assign = 1
             jugador = "O"
+            print(f"El numero asignado a esa casilla es {boton.num_assign}")
+            print("________________________________________________________________")
+
         else:
             boton.num_assign = 2
             jugador = "X"
+            print(f"El numero asignado a esa casilla es {boton.num_assign}")
+            print("________________________________________________________________")
+
+
 
         ganador = validar_juego()
         if ganador != None:
@@ -86,6 +92,7 @@ def jugar(row,col):
                 deshabilitar_botones()
         else:
             test_congratulations_player.config(text="No hay ganadores")
+
         
 
 def marcar_celda(boton):
