@@ -69,3 +69,12 @@ Durante el desarrollo del proyecto utilizamos herramientas y recursos que cuenta
 - **Claude (Anthropic):** https://claude.ai/
 
 La interfaz gráfica se construyó utilizando los elementos disponibles en Tkinter. En los archivos revisados no identificamos imágenes externas ni fragmentos de código de terceros incorporados directamente.
+
+## Licencia
+Este proyecto utiliza la **Licencia MIT**, que permite que otras personas puedan consultar, utilizar, modificar y distribuir el código, siempre que se mantengan los avisos de autoría y el texto de la licencia original.
+
+**Universidad Internacional del Ecuador**
+
+**Proyecto integrador – Primer trimestre**
+
+Christian Suarez | Nicolas Rivera | Christopher Barreno
