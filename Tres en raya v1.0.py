@@ -2,11 +2,30 @@
 #27.09.2026
 import tkinter as tk
 import random
+from types import SimpleNamespace
+
 
 window_title = tk.Tk()
 window_title.title("Tres en Raya v.1.0")
 window_title.geometry("800x700")
 window_title.configure(bg= "#CCE6F4")
+
+#Seleccion modo local o modo peer to peer
+def select_local_peertopeer():
+
+    for eliminate in vars(title_items).values():
+        eliminate.destroy()
+    
+    boton_local = tk.Button(window_title, 
+                            text = "MODO LOCAL",
+                            font = ("Gill Sans Ultra Bold", 20),
+                            command = gameplay_tres_en_raya)
+    boton_local.place(relx = 0.15, rely = 0.5)
+
+    boton_peertopeer = tk.Button(window_title,
+                                 text = "MODO ONLINE",
+                                 font = ("Gill Sans Ultra Bold", 20))
+    boton_peertopeer.place(relx = 0.58, rely = 0.5)
 
 #Player selection
 jugador = "X"
@@ -33,7 +52,6 @@ def gameplay_tres_en_raya():
     global jugador
     jugador = "X"                  
     asignacion_players()           
-    Begin_button.place_forget()
     botones = [
     [None, None, None],
     [None, None, None],
@@ -44,7 +62,7 @@ def gameplay_tres_en_raya():
     congratulations_player_text_container.pack(fill="x")
     gameplay_player_container = tk.Frame(window_title, width=400, height= 400)
     gameplay_player_container.pack(fill = "x")
-
+    
     '''
     Validar juego retorna:
 
@@ -141,48 +159,48 @@ def gameplay_tres_en_raya():
     test_congratulations_player = tk.Label(congratulations_player_text_container,
         text = f"{nombre_de('X')} es X y empieza | {nombre_de('O')} es O")
     test_congratulations_player.place(relx = 0.5, rely= 0.12, anchor="center")
-    test_congratulations_player.pack()
 
     for row in range(3):
         for col in range(3):
 
             boton = tk.Button(gameplay_player_container,
                 text = "",
-                width=10,
-                height=5,
+                width=20,
+                height=10,
                 cursor = "cross",
                 command = lambda r = row, c = col: jugar(r,c)
             )
 
             boton.num_assign = None
-            #boton.config(command=lambda b=boton: marcar_celda(b))        
             boton.grid(row=row, column=col)
             botones[row][col] = boton
 
 #Ventana de inicio
-titulo = tk.Label(window_title, text = "TRES EN RAYA", 
-                  font=("Gill Sans Ultra Bold", 24), 
-                  bg= "#CCE6F4", fg= "#175676")
-titulo.pack()
-titulo.place(relx = 0.5, rely= 0.12, anchor="center")
-text1 = tk.Label(window_title, text = "Creado por:", font = ("Arial, 12"), 
-                 bg= "#CCE6F4", fg= "#175676")
-text1.pack()
-text1.place(relx = 0.5, rely= 0.18, anchor="center")
-text2 = tk.Label(window_title, text = "Christian Suarez, Nicolas Rivera y Christopher Barreno", 
-                 font = ("Arial, 12"),
-                 bg= "#CCE6F4", fg="#175676")
-text2.pack()
-text2.place(relx= 0.5, rely= 0.228,anchor="center")
+title_items = SimpleNamespace(
 
+    titulo = tk.Label(window_title, text = "TRES EN RAYA", 
+                        font=("Gill Sans Ultra Bold", 24), 
+                        bg= "#CCE6F4", fg= "#175676"),
 
-Begin_button = tk.Button(window_title,
-                         command=gameplay_tres_en_raya, 
-                         text = "EMPEZAR", 
-                         font = ("Gill Sans Ultra Bold", 20),
-                         bg = "#BA324F",
-                         fg= "#F3F2F2")
-Begin_button.pack()
-Begin_button.place(relx=0.5 , rely= 0.8, anchor="center")
+        text1 = tk.Label(window_title, text = "Creado por:", font = ("Arial", 12), 
+                        bg= "#CCE6F4", fg= "#175676"),
+
+        text2 = tk.Label(window_title, text = "Christian Suarez, Nicolas Rivera y Christopher Barreno", 
+                        font = ("Arial", 12),
+                        bg= "#CCE6F4", fg="#175676"),
+    
+        Begin_button = tk.Button(window_title,
+                                command = select_local_peertopeer, 
+                                text = "EMPEZAR", 
+                                font = ("Gill Sans Ultra Bold", 20),
+                                bg = "#BA324F",
+                                fg= "#F3F2F2")
+
+)
+
+title_items.Begin_button.place(relx=0.5 , rely= 0.8, anchor="center")
+title_items.text2.place(relx= 0.5, rely= 0.228,anchor="center")
+title_items.titulo.place(relx = 0.5, rely= 0.12, anchor="center")
+title_items.text1.place(relx = 0.5, rely= 0.18, anchor="center")
 
 window_title.mainloop()
